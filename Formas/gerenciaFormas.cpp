@@ -13,6 +13,8 @@ using namespace std;
 #include "circulo.h"
 #include "esfera.h"
 #include "Forma.h"
+#include "hexagono.h"
+#include "prisma.h"
 
 using namespace std;
 
@@ -25,6 +27,8 @@ Forma *criaForma()
 	cout<<"2 - Triangulo" << endl;
 	cout<<"3 - Retangulo" << endl;
 	cout<<"4 - Esfera" << endl;
+	cout<<"5 - Hexagono Regular" << endl;
+	cout<<"6 - Prisma Regular" << endl;
 
 	cout<<"Qual forma desena criar? " << endl;
 	cin >> formaCriar;
@@ -68,6 +72,24 @@ Forma *criaForma()
 			cout << "Raio da esfera: ";
 			cin >> r;
 			pForma = new esfera(r);
+			break;
+		}
+		case 5:
+		{
+			float lado;
+			cout << "Lado do hexagono: ";
+			cin >> lado;
+			pForma = new hexagono(lado);
+			break;
+		}
+		case 6:
+		{
+			float l,h;
+			cout << "Lado da base: ";
+			cin >> l;
+			cout << "Altura: ";
+			cin >> h;
+			pForma = new prisma(l,h);
 			break;
 		}
 	}
