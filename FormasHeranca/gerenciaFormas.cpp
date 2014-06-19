@@ -16,6 +16,22 @@ using namespace std;
 
 using namespace std;
 
+template <class Geral>
+
+void ordena(Geral **vet, int nObj){
+	Geral *aux;
+
+	for(int i = 0; i < nObj; i++){
+		for(int j = 0; j < nObj - 1; j++){
+			if(*vet[j] > *vet[j+1]){
+				aux = vet[j];
+				vet[j] = vet[j + 1];
+				vet[j + 1] = aux;
+			}
+		}
+	}
+}
+
 Forma *criaForma()
 {
 	Forma *pForma;
@@ -89,6 +105,19 @@ void mostrarFormas(Forma *f[])
 	}
 }
 
+bool operator>(Forma& f1, Forma& f2){
+	if(f1.nDimensoes() > f2.nDimensoes()){
+		return 1;
+	}
+	if(f1.nDimensoes() < f2.nDimensoes()){
+		return 0;
+	}
+	if(f1.nDimensoes() == 2){
+		return f1.area() > f2.area();
+	}
+	return f1.volume() > f2.volume();
+}
+
 int main()
 {
 	Forma *vetFormas[50];
@@ -105,7 +134,8 @@ int main()
 		cout << endl;
 		cout << "1 - Criar forma" << endl;
 		cout << "2 - Mostrar formas" << endl;
-		cout << "3 - Sair" << endl;
+		cout << "3 - Ordenar formas" << endl;
+		cout << "4 - Sair" << endl;
 		cout << "O que deseja fazer? ";
 		cin >> selecao;
 		cin.get();
@@ -122,8 +152,17 @@ int main()
 				mostrarFormas(vetFormas);
 				break;
 			}
+			case 3:
+			{
+				int tam = 0;
+				while(vetFormas[tam] != NULL){
+					tam++;
+				}
+				ordena<Forma>(vetFormas, tam);
+			}
 		}
-	} while ( selecao != 3 );
+
+	} while ( selecao != 4 );
 
 	i = 0;
 	while (vetFormas[i] != NULL)
